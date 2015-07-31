@@ -1,34 +1,43 @@
 # Gpgenv
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gpgenv`. To experiment with that code, run `bin/console` for an interactive prompt.
+Gpgenv is similar to [envdir](http://cr.yp.to/daemontools/envdir.html), but it lets you use gpg-encrypted 
+files. This is very useful if you want to store sensitive credentials on your machine, but you want to 
+keep them encrypted. 
 
-TODO: Delete this and the text above, and describe your gem
+Gpgenv plays very nicely with [pass](http://www.passwordstore.org/). For example:
 
-## Installation
+Note that gpgenv will ask you to decrypt files *repeatedly* unless you have ```gpg-agent``` configured.
 
-Add this line to your application's Gemfile:
+```bash
+# Set up a shortcut to your passwordstore home directory
+export GPGENV_HOME=$HOME/.password-store
 
-```ruby
-gem 'gpgenv'
+# Insert your oauth token into your password store:
+pass insert myservice/OAUTH_TOKEN
+
+# Use gpgenv to spawn a bash session:
+gpgenv $GPGENV_HOME/myservice bash
+
+# From the new bash session, use your oauth token to hit the service:
+curl https://$user:$OAUTH_TOKEN@myservice.com/get_some_data
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install gpgenv
+## Installation
+```gem install gpgenv```
 
 ## Usage
 
-TODO: Write usage instructions here
+### Spawn a child process
+Gpgenv can spawn a child process that inherits environment variables like so:
+```bash
+gpgenv /some/dir /some/other/dir "process_to_run argument1 argument2"
+```
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+### Export environment variables
+Gpgenv can export environment variables in your current shell session, like so:
+```bash
+eval `gpgshell /some/dir /some/other/dir`
+```
 
 ## Contributing
 
