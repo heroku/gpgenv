@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'gpgenv/exec_command'
+begin
+  Gpgenv::ExecCommand.new(ARGV).run
+rescue StandardError => bang
+  raise if ENV['DEBUG'] == 'true'
+  puts bang.message
+  exit 1
+end
+
+
+
