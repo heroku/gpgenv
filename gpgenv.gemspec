@@ -6,12 +6,12 @@ require 'gpgenv/version'
 Gem::Specification.new do |spec|
   spec.name          = "gpgenv"
   spec.version       = Gpgenv::VERSION
-  spec.authors       = ["TODO: Write your name"]
+  spec.authors       = ["Michael Shea"]
   spec.email         = ["michael.shea@heroku.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Read environment variables from gpg-encrypted files}
+  spec.description   = %q{Plays nicely with passwordstore.org}
+  spec.homepage      = "https://github.com/heroku/gpgenv"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
