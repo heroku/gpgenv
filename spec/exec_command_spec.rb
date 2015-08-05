@@ -5,7 +5,7 @@ module Gpgenv
     let (:subject) { ExecCommand.new( %w'dir1 command') }
 
     it 'works' do
-      allow(::Gpgenv::Env).to receive(:read_files).with(['dir1']){ {'key' => 'value'} }
+      allow(::Gpgenv).to receive(:read_files).with(['dir1']){ {'key' => 'value'} }
       expect(ENV).to receive(:[]=).with('key', 'value')
       expect(subject).to receive(:exec).with('command')
       subject.run 

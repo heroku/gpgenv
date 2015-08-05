@@ -1,4 +1,4 @@
-require 'gpgenv/env'
+require 'gpgenv'
 require 'shellwords'
 
 module Gpgenv
@@ -12,7 +12,7 @@ module Gpgenv
 
     def run
       fail("Usage: gpgshell dir1 dir2 ...") unless args.size >= 1
-      hash = Env.read_files(args)
+      hash = Gpgenv.read_files(args)
       hash.each do |k, v|
         puts "export #{k}=#{Shellwords.escape(v)}"
       end
