@@ -35,8 +35,8 @@ extremely common. Your .netrc file probably contains all sorts of sensitive data
 simply don't understand gpg. Storing this stuff in plaintext is dangerous - but you do it anyway because the alternatives are just too painful.
 
 I love [pass](http://www.passwordstore.org/), because it makes it easy to store passwords encrypted. But it doesn't make it easy to *use* them
-(tbh, that isn't its job). I wrote this to bridge that gap, and make it easy for me to never store sensitive information in an unencrypted format 
-on my own machine. I hope that you find it useful as well.
+(tbh, that isn't its job). I wrote `gpgenv` to bridge that gap, and make it easy for me to never store sensitive information in an unencrypted format 
+on my own machine. I hope that you find it useful as well, and you use it to stop yourself from committing security sins.
 
 ## Installation
 ```gem install gpgenv```
