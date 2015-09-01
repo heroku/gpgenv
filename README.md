@@ -30,7 +30,7 @@ curl https://$user:$OAUTH_TOKEN@myservice.com/get_some_data
 ```
 
 ## Why?
-As an admin, I am personally guilty of occasionally storing sensitive credentials on disk. Personal experience leads me to believe that this is
+As an admin, I am guilty of occasionally storing sensitive credentials on disk. Personal experience leads me to believe that this is
 extremely common. Your .netrc file probably contains all sorts of sensitive data, and even if you use a gpg-encrypted .netrc file, many tools
 simply don't understand gpg. Storing this stuff in plaintext is dangerous - but you do it anyway because the alternatives are just too painful.
 
