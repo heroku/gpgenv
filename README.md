@@ -4,9 +4,9 @@ Gpgenv is similar to [envdir](http://cr.yp.to/daemontools/envdir.html), but it l
 files. This is very useful if you want to store sensitive credentials on your machine, but you want to 
 keep them encrypted. 
 
-Gpgenv plays very nicely with [pass](http://www.passwordstore.org/). For example:
+Note that gpgenv will ask you to decrypt files *repeatedly* unless you have `gpg-agent` configured.
 
-Note that gpgenv will ask you to decrypt files *repeatedly* unless you have ```gpg-agent``` configured.
+Gpgenv plays very nicely with [pass](http://www.passwordstore.org/). For example:
 
 ```bash
 # Set up a shortcut to your passwordstore home directory
