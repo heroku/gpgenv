@@ -18,7 +18,7 @@ module Gpgenv
       hash = Gpgenv.read_files(directories)
       str = ''
       hash.each do |k,v|
-        str << "#{k}=#{v}"
+        str << "#{k}=#{v}\n"
       end
       File.write(file, str)
     end
