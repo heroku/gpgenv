@@ -17,13 +17,13 @@ Gpgenv plays very nicely with [pass](http://www.passwordstore.org/). For example
 
 ```bash
 # Set up a shortcut to your passwordstore home directory
-export GPGENV_HOME=$HOME/.password-store
+export GPGENV_HOME=$HOME/.password-store/env
 
 # Insert your oauth token into your password store:
-pass insert myservice/OAUTH_TOKEN
+pass insert env/myservice/OAUTH_TOKEN
 
 # Use gpgenv to spawn a bash session:
-gpgenv $GPGENV_HOME/myservice bash
+gpgenv myservice bash
 
 # From the new bash session, use your oauth token to hit the service:
 curl https://$user:$OAUTH_TOKEN@myservice.com/get_some_data
