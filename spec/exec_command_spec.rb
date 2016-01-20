@@ -8,7 +8,7 @@ module Gpgenv
       allow(::Gpgenv).to receive(:read_files).with(['dir1']){ {'key' => 'value'} }
       expect(ENV).to receive(:[]=).with('key', 'value')
       expect(subject).to receive(:exec).with('command')
-      subject.run 
+      subject.run(%w'dir1 command')
     end
 
   end

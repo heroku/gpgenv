@@ -1,18 +1,14 @@
+require 'clamp'
 require 'gpgenv'
 
 module Gpgenv
-  class ExecCommand
+  class ExecCommand < Clamp::Command
 
-    attr_reader :args
+    parameter "ARGUMENTS ...", "arguments", :attribute_name => :args
 
-    def initialize(args)
-      @args = args
-    end
-
-    def run
-      fail("Usage: gpgenv dir1 dir2 dir3 ... command") unless args.size >= 2
-      directories = args[0..-2]
+    def execute
       cmd = args.last
+      directories = args[0..-2]
       hash = Gpgenv.read_files(directories)
       hash.each{ |k,v| ENV[k]=v }
       exec cmd
