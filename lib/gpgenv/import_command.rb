@@ -2,7 +2,7 @@ require 'clamp'
 
 module Gpgenv
   class ImportCommand < Clamp::Command
-    parameter 'dir', :attribute_name => 'dir'
+    option '--dir', 'DIRECTORY', 'directory, relative to $GPGENV_HOME, to store files in', :attribute_name => 'dir', :required => true
     option '--file', 'FILE', 'env file to read from', :default => '.env'
 
     def full_dir
