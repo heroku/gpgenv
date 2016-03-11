@@ -7,6 +7,7 @@ module Gpgenv
     parameter "ARGUMENTS ...", "arguments", :attribute_name => :args
 
     def execute
+      FileUtils.mkdir_p(Gpgenv.dir)
       if args.size == 1
         Gpgenv.set(args[0], STDIN.read)
       elsif args.size == 2
