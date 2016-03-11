@@ -9,3 +9,5 @@
 /spec/reports/
 /tmp/
 *.gem
+.gpgenv/**/*
+.env

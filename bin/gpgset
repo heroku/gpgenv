@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
-require 'gpgenv/exec_command'
+require 'gpgenv/set_command'
 begin
-  Gpgenv::ExecCommand.run
+  Gpgenv::SetCommand.run
 rescue StandardError => bang
   raise if ENV['DEBUG'] == 'true'
   puts bang.message

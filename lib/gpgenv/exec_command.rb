@@ -7,11 +7,7 @@ module Gpgenv
     parameter "ARGUMENTS ...", "arguments", :attribute_name => :args
 
     def execute
-      cmd = args.last
-      directories = args[0..-2]
-      hash = Gpgenv.read_files(directories)
-      hash.each{ |k,v| ENV[k]=v }
-      exec cmd
+      Gpgenv.exec_command args[0..-1].join(' ')
     end
 
   end

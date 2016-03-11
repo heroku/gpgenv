@@ -1,26 +1,22 @@
+require 'gpgenv'
+require 'shellwords'
 require 'clamp'
 
 module Gpgenv
-  class ExportCommand < Clamp::Command
-    parameter 'DIRS ...', 'dirs', :attribute_name => :directories
+  class ExportCommand  < Clamp::Command
 
-    option '--file', 'FILE', 'env file to read from', :default => '.env'
-
-    def full_dir
-      if ENV['GPGENV_HOME']
-        "#{ENV['GPGENV_HOME']}/#{dir}"
-      else
-        dir
-      end
-    end
+    option ['-f', '--force'], :flag, "Force overwrite of existing .env file"
 
     def execute
-      hash = Gpgenv.read_files(directories)
-      str = ''
-      hash.each do |k,v|
-        str << "#{k}=#{v}\n"
+      if File.exist?('.env') && !force?
+        fail(".env file already exists. Use --force to overwrite it.")
       end
-      File.write(file, str)
+
+      File.open('.env', 'w') do |f|
+        Gpgenv.read_files.each do |k, v|
+          f.write "#{k}=#{Shellwords.escape(v)}"
+        end
+      end
     end
 
   end
