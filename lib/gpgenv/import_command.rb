@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'gpgenv'
 require 'shellwords'
 require 'clamp'
@@ -12,7 +13,7 @@ module Gpgenv
         fail("#{Gpgenv.dir} already exists. Use --force to overwrite it.")
       end
 
-      FileUtils.mkdir_p(Gpgenv.dir)
+      ::FileUtils.mkdir_p(Gpgenv.dir)
       File.open('.env', 'r').each_line do |line|
         i = line.index('=')
         key=line[0..i-1]
