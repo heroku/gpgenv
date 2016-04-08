@@ -5,30 +5,6 @@ Gpgenv is similar to [envdir](http://cr.yp.to/daemontools/envdir.html), but it l
 files. This is very useful if you want to store sensitive credentials on your machine, but you want to 
 keep them encrypted. 
 
-Please note that this is *not meant to run services*, despite its similarity to 
-envdir: When you use it, you will be required to enter the passphrase to decrypt the gpg files. Robots and
-automated processes should not have this passphrase (otherwise, why encrypt at all?). The primary use case for this is to stop *you, personally*,
-from storing unencrypted, sensitive credentials on disk (like in your .netrc file, your ~/.aws/credentials file, etc), but to still make it
-easy for you to actually use these sensitive credentials.
-
-Also note that gpgenv will ask you to decrypt files *repeatedly* unless you have `gpg-agent` configured, which will make it borderline unusable.
-
-Gpgenv plays very nicely with [pass](http://www.passwordstore.org/). For example:
-
-```bash
-# Set up a shortcut to your passwordstore home directory
-export GPGENV_HOME=$HOME/.password-store/env
-
-# Insert your oauth token into your password store:
-pass insert env/myservice/OAUTH_TOKEN
-
-# Use gpgenv to spawn a bash session:
-gpgenv myservice bash
-
-# From the new bash session, use your oauth token to hit the service:
-curl https://$user:$OAUTH_TOKEN@myservice.com/get_some_data
-```
-
 ## Why?
 As an admin, I am guilty of occasionally storing sensitive credentials on disk. Personal experience leads me to believe that this is
 extremely common. Your .netrc file probably contains all sorts of sensitive data, and even if you use a gpg-encrypted .netrc file, many tools
@@ -42,16 +18,26 @@ on my own machine. I hope that you find it useful as well, and you use it to sto
 
 ## Usage
 
-### Spawn a child process
+### Create or update files in a .gpgenv directory
+
+Gpgenv can create a .gpgenv directory without you ever needing to store plaintext 
+files permanently on disk. Simply run `gpgedit` to either create a new .gpgenv 
+directory, or edit the keys and values in an existing one.
+
+Alternatively, if you have a .env file and you'd like to switch to gpgenv, run
+`dotenv2gpg`. You can switch back by running `gpg2dotenv`, if you choose.
+
+### Run a process
 Gpgenv can spawn a child process that inherits environment variables like so:
 ```bash
-gpgenv /some/dir /some/other/dir "process_to_run argument1 argument2"
+gpgenv "process_to_run argument1 argument2"
 ```
 
 ### Export environment variables
 Gpgenv can export environment variables in your current shell session, like so:
 ```bash
-eval `gpgshell /some/dir /some/other/dir`
+cd /dir/that/has/a/.gpgenv/subdirectory
+eval `gpgshell`
 ```
 
 ## Contributing
