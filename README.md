@@ -18,6 +18,12 @@ on my own machine. I hope that you find it useful as well, and you use it to sto
 
 ## Usage
 
+### Setup
+```bash
+# You might want to add this to your profile.
+export GPGENV_KEY_ID=<key-id-to-use-to-encrypt-stuff>
+```
+
 ### Create or update files in a .gpgenv directory
 
 Gpgenv can create a .gpgenv directory without you ever needing to store plaintext 
