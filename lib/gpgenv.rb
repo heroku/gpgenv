@@ -22,7 +22,7 @@ module Gpgenv
   end
 
   def self.set(key, value)
-    system "echo #{Shellwords.shellescape(value)} | gpg -e -r #{key_id} -o #{dir}/#{key}.gpg"
+    system "echo #{Shellwords.shellescape(value)} | gpg --batch --yes -e -r #{key_id} -o #{dir}/#{key}.gpg"
   end
 
   def self.exec_command(cmd)

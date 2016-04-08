@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require 'gpgenv/edit_command'
+begin
+  Gpgenv::EditCommand.run
+rescue StandardError => bang
+  raise if ENV['DEBUG'] == 'true'
+  puts bang.message
+  exit 1
+end
+
+
