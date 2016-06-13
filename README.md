@@ -42,7 +42,7 @@ gpgenv "process_to_run argument1 argument2"
 ### Export environment variables
 Gpgenv can export environment variables in your current shell session, like so:
 ```bash
-cd /dir/that/has/a/.gpgenv/subdirectory
+cd /dir/that/contains/.gpgenv
 eval `gpgshell`
 ```
 
