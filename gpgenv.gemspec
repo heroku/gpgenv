@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["michael.shea@heroku.com"]
 
   spec.summary       = %q{Read environment variables from gpg-encrypted files}
-  spec.description   = %q{Plays nicely with passwordstore.org}
+  spec.description   = %q{Store your local env vars securely}
   spec.homepage      = "https://github.com/heroku/gpgenv"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
