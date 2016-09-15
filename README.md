@@ -27,8 +27,8 @@ export GPGENV_KEY_ID=<key-id-to-use-to-encrypt-stuff>
 ### Create or update files in a .gpgenv directory
 
 Gpgenv can create a .gpgenv directory without you ever needing to store plaintext 
-files permanently on disk. Simply run `gpgedit` to either create a new .gpgenv 
-directory, or edit the keys and values in an existing one.
+files permanently on disk. Simply run `gpgedit` to create a new .gpgenv 
+directory or edit the keys and values in an existing one.
 
 Alternatively, if you have a .env file and you'd like to switch to gpgenv, run
 `dotenv2gpg`. You can switch back by running `gpg2dotenv`, if you choose.
