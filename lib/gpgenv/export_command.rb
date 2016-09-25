@@ -1,9 +1,10 @@
 require 'gpgenv'
+require 'gpgenv/base_command'
 require 'shellwords'
 require 'clamp'
 
-module Gpgenv
-  class ExportCommand  < Clamp::Command
+class Gpgenv
+  class ExportCommand  < Gpgenv::BaseCommand
 
     option ['-f', '--force'], :flag, "Force overwrite of existing .env file"
 
@@ -13,7 +14,7 @@ module Gpgenv
       end
 
       File.open('.env', 'w') do |f|
-        Gpgenv.read_files.each do |k, v|
+        gpgenv.read_files.each do |k, v|
           f.write "#{k}=#{Shellwords.escape(v)}"
         end
       end

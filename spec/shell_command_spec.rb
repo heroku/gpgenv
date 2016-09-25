@@ -1,6 +1,6 @@
 require 'gpgenv/shell_command'
 
-module Gpgenv
+class Gpgenv
   describe ShellCommand do
     let (:subject) { ShellCommand.new(%w'dir1') }
 

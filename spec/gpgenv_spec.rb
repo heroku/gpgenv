@@ -24,14 +24,6 @@ describe Gpgenv do
     let (:gpgenv_home) { nil }
 
     before do
-      allow(Gpgenv::Config).to receive(:gpgenv_home) { gpgenv_home } 
-      allow(File).to receive(:exists?).with(dir) { dir_exists }
-      allow(File).to receive(:directory?).with( dir ) { dir_is_a_directory }
-      allow(Dir).to receive(:glob).with("#{dir}/*") { glob }
-      allow(File).to receive(:directory?).with( 'file1') { false }
-      allow(File).to receive(:directory?).with( 'file2.gpg') { false }
-      allow(File).to receive(:directory?).with( 'subdir') { true }
-      allow(File).to receive(:read).with('file1'){ 'value1' }
       allow(subject).to receive(:`).with('gpg --batch --quiet --decrypt file2.gpg') { 'value2' }
       allow($?).to receive(:success?) { decrypt_succeeded }
     end

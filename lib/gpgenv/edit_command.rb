@@ -1,14 +1,15 @@
 require 'fileutils'
 require 'clamp'
 require 'gpgenv'
+require 'gpgenv/base_command'
 require 'tempfile'
 
 
-module Gpgenv
-  class EditCommand < Clamp::Command
+class Gpgenv
+  class EditCommand < Gpgenv::BaseCommand
 
     def execute
-      env = Hash[Gpgenv.read_files.map{|k,v| [ k, to_editable(v) ] }]
+      env = Hash[gpgenv.read_files.map{|k,v| [ k, to_editable(v) ] }]
       Tempfile.open('.env', ENV.fetch('TMPDIR', '/tmp')) do |f|
         env.each do |k,v|
           f.write("#{k}=#{v}\n")
@@ -21,13 +22,28 @@ module Gpgenv
         f.rewind
         lines = f.read.split("\n")
 
-        ::FileUtils.mkdir_p(Gpgenv.dir)
-        lines.each do |line|
+        ::FileUtils.mkdir_p(gpgenv.dir)
+        new_env = {}
+        lines.each_with_index do |line, index|
           i = line.index('=')
+          fail("Line #{index+1} is invalid") unless i
           key = line[0..i-1]
           value = line[i+1..-1]
-          Gpgenv.set(key, from_editable(value))
+          new_env[key] = value
         end
+
+        new_env.each do |key, value|
+          gpgenv.set(key, from_editable(value))
+        end
+
+        missing_keys = env.keys.select do |k|
+          !new_env.keys.include?(k)
+        end
+
+        missing_keys.each do |missing_key|
+          gpgenv.set(missing_key, nil)
+        end
+
       end
     end
 
@@ -54,4 +70,5 @@ module Gpgenv
     end
 
   end
+
 end
