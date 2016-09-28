@@ -4,10 +4,6 @@ require 'shellwords'
 
 class Gpgenv
 
-  def self.default_dir
-    "#{Dir.pwd}/.gpgenv"
-  end
-
   attr_reader :dir
 
   def initialize(dir:)
@@ -16,6 +12,10 @@ class Gpgenv
 
   def read_files
     hash = {}
+
+    fail("#{dir} does not exist.") unless File.exist?(dir)
+    fail("#{dir} is not a directory.") unless File.directory?(dir)
+
 
     Dir.glob("#{dir}/*.gpg").each do |f|
       ext = File.extname(f)
