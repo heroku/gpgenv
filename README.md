@@ -1,14 +1,12 @@
 # Gpgenv
 
 ## Wat?
-Gpgenv is similar to [envdir](http://cr.yp.to/daemontools/envdir.html), but it lets you use gpg-encrypted 
-files. This is very useful if you want to store sensitive credentials on your machine, but you want to 
+Gpgenv is similar to [envdir](http://cr.yp.to/daemontools/envdir.html) and [dotenv](https://github.com/bkeepers/dotenv), but it lets you use gpg-encrypted files. This is useful if you want to store sensitive credentials on your machine, but you want to 
 keep them encrypted. 
 
 ## Why?
 As an admin, I am guilty of occasionally storing sensitive credentials on disk. Personal experience leads me to believe that this is
-extremely common. Your .netrc file probably contains all sorts of sensitive data, and even if you use a gpg-encrypted .netrc file, many tools
-simply don't understand gpg. Storing this stuff in plaintext is dangerous - but you do it anyway because the alternatives are just too painful.
+extremely common. Your .netrc file probably contains all sorts of sensitive data, and even if you use a gpg-encrypted .netrc file, many tools simply don't understand gpg. Storing this stuff in plaintext is dangerous, but you do it anyway because the alternatives are just too painful.
 
 I love [pass](http://www.passwordstore.org/), because it makes it easy to store passwords encrypted. But it doesn't make it easy to *use* 
 them in any capacity other than copy-and-pasting them. I wrote `gpgenv` to bridge that gap: Easily edit gpg-encrypted files, easily
