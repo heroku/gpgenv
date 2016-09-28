@@ -1,13 +1,13 @@
 require 'gpgenv/exec_command'
 
-module Gpgenv
+class Gpgenv
   describe ExecCommand do
     let (:subject) { ExecCommand.new( %w'dir1 command') }
+    let (:gpgenv) { double('gpgenv') }
 
     it 'works' do
-      allow(::Gpgenv).to receive(:read_files).with(['dir1']){ {'key' => 'value'} }
-      expect(ENV).to receive(:[]=).with('key', 'value')
-      expect(subject).to receive(:exec).with('command')
+      allow(subject).to receive(:gpgenv) { gpgenv }
+      expect(gpgenv).to receive(:exec_command).with('dir1 command')
       subject.run(%w'dir1 command')
     end
 

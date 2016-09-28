@@ -1,12 +1,13 @@
 require 'gpgenv'
 require 'shellwords'
 require 'clamp'
+require 'gpgenv/base_command'
 
-module Gpgenv
-  class ShellCommand  < Clamp::Command
+class Gpgenv
+  class ShellCommand  < Gpgenv::BaseCommand
 
     def execute
-      Gpgenv.read_files.each do |k, v|
+      gpgenv.read_files.each do |k, v|
         puts "export #{k}=#{Shellwords.escape(v)}"
       end
     end

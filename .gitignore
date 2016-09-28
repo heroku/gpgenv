@@ -11,3 +11,4 @@
 *.gem
 .gpgenv/**/*
 .env
+/tags
