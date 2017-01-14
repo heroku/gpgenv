@@ -1,12 +1,18 @@
 #!/usr/bin/env ruby
-require 'gpgenv/exec_command'
+require 'gpgenv/gpgenv_command'
 begin
-  Gpgenv::ExecCommand.run
+  # Support both "gpgenv <do-something>" and "gpgenv <subcommand>".
+  if ARGV.first && ARGV.first == '--version'
+    puts Gpgenv::VERSION 
+  elsif ARGV.first && ARGV.first[0] != '-' && !Gpgenv::GpgenvCommand.find_subcommand(ARGV.first)
+    Gpgenv::ExecCommand.run
+  else
+    Gpgenv::GpgenvCommand.run
+  end 
 rescue StandardError => bang
   raise if ENV['DEBUG'] == 'true'
   puts bang.message
   exit 1
 end
-
 
 
