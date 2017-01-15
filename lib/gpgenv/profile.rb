@@ -12,8 +12,6 @@ class Gpgenv
       exec(read_files, cmd)
     end
 
-    private
-
     def read_files
       hash = {}
       gpgenvs.each do |gpgenv|
@@ -21,6 +19,8 @@ class Gpgenv
       end
       hash
     end
+
+    private
 
     def gpgenvs
       fail(".gpgenvrc file does not exist") unless File.exist?(file)
