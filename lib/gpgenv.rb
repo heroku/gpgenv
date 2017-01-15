@@ -16,7 +16,6 @@ class Gpgenv
     fail("#{dir} does not exist.") unless File.exist?(dir)
     fail("#{dir} is not a directory.") unless File.directory?(dir)
 
-
     Dir.glob("#{dir}/*.gpg").each do |f|
       ext = File.extname(f)
       var = File.basename(f, ext)

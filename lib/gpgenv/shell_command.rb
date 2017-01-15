@@ -14,7 +14,7 @@ class Gpgenv
 
     def execute
       executor.read_files.each do |k, v|
-        puts "export #{k}=#{Shellwords.escape(v)}"
+        puts "export #{k}='#{v.gsub("'", "\'").gsub("\n", "\\n")}'"
       end
     end
 

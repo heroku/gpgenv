@@ -24,8 +24,10 @@ class Gpgenv
 
     def gpgenvs
       fail(".gpgenvrc file does not exist") unless File.exist?(file)
+
       yaml = YAML.load(File.read(file))
       fail("Invalid .gpgenvrc file") unless yaml.is_a?(Hash)
+
       value = yaml[name]
 
       fail("No such profile: #{name} in .gpgenvrc") unless value
