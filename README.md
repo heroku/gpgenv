@@ -14,37 +14,55 @@ export them as environment variables, and never store sensitive information in p
 I hope that you find `gpgenv` useful, and you use it to avoid security sins.
 
 ## Installation
-```gem install gpgenv```
+`gem install gpgenv`
 
 ## Usage
 
 ### Setup
 ```bash
-# You might want to add this to your profile.
+# Add this to your profile:
 export GPGENV_KEY_ID=<key-id-to-use-to-encrypt-stuff>
 ```
 
 ### Create or update files in a .gpgenv directory
 
 Gpgenv can create a .gpgenv directory without you ever needing to store plaintext 
-files permanently on disk. Simply run `gpgedit` to create a new .gpgenv 
-directory or edit the keys and values in an existing one.
+files permanently on disk. Use `gpgenv edit` to edit a `yaml` file using `$EDITOR`.
+When you are done editing the file, it will be parsed and saved to your `.gpgenv` directory.
 
-Alternatively, if you have a .env file and you'd like to switch to gpgenv, run
-`dotenv2gpg`. You can switch back by running `gpg2dotenv`, if you choose.
+You can also use `gpgenv import` to convert a `.env` file in the current directory to a `.gpgenv`
+directory.
 
 ### Run a process
 Gpgenv can spawn a child process that inherits environment variables like so:
 ```bash
-gpgenv "process_to_run argument1 argument2"
+gpgenv exec <command>  arg1 arg2 ...
 ```
 
 ### Export environment variables
 Gpgenv can export environment variables in your current shell session, like so:
+
 ```bash
 cd /dir/that/contains/.gpgenv
 eval `gpgshell`
 ```
+
+### Profiles
+
+Gpgenv supports profiles. Create a ~/.gpgenvrc file like this:
+
+```yaml
+---
+profile1:
+  - /home/YOU/.gpgenv/dir1
+  - /home/YOU/.gpgenv/extra_stuff
+profile2:
+  - /home/YOU/.gpgenv/dir1
+```
+
+You can then pass a `-p` parameter to `gpenv exec` or `gpgenv shell` specifying
+which profile to use, rather than using the `.gpgenv` directory relative to the current path.
+All of the directories specified in the profile will be loaded sequentially.
 
 ## Contributing
 
