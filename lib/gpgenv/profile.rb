@@ -17,7 +17,7 @@ class Gpgenv
     def read_files
       hash = {}
       gpgenvs.each do |gpgenv|
-        hash.merge(gpgenv.read_files)  
+        hash.merge!(gpgenv.read_files)  
       end
       hash
     end
@@ -25,18 +25,15 @@ class Gpgenv
     def gpgenvs
       fail(".gpgenvrc file does not exist") unless File.exist?(file)
       yaml = YAML.load(File.read(file))
-
-      fail("Malformed .gpgenvrc file") unless yaml.is_a?(Hash)
+      fail("Invalid .gpgenvrc file") unless yaml.is_a?(Hash)
       value = yaml[name]
 
-      if value 
-        fail("Malformed .gpgenvrc file") if !value.is_a?(Array) 
-        value.map{ |dir| Gpgenv.new(dir: dir) } 
-      else
-        fail("No such profile: #{name} in .gpgenvrc")
-      end
+      fail("No such profile: #{name} in .gpgenvrc") unless value
+      fail("Invalid .gpgenvrc file") if !value.is_a?(Array) 
+
+      value.map{ |dir| Gpgenv.new(dir: dir) } 
     rescue Psych::SyntaxError => e
-      fail("Invalid .gpgenvrc file: #{e.message}")
+      fail("Malformed .gpgenvrc file: #{e.message}")
     end 
 
   end

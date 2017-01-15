@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'gpgenv/exec_command'
 
 class Gpgenv
