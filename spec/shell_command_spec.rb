@@ -9,7 +9,7 @@ class Gpgenv
     it 'works' do
       allow(subject).to receive(:gpgenv) { gpgenv }
       allow(gpgenv).to receive(:read_files) { {'key'=>'value'} }
-      expect(STDOUT).to receive(:puts).with "export key='value'"
+      expect(STDOUT).to receive(:puts).with "export key=$'value'"
       subject.run(%w'-d dir1')
     end
 
